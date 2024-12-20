@@ -1,0 +1,24 @@
+{
+  "name": "otto_fetch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "source": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc -p tsconfig_bundle.json"
+  },
+  "author": "Rocky",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RockyEMSqr/otto_fetch.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "unfetch": "^5.0.0"
+  }
+}
