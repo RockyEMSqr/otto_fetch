@@ -54,20 +54,21 @@ require("unfetch/polyfill");
 function processResponse(res) {
     return __awaiter(this, void 0, void 0, function () {
         var retVal, ct, err_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
                     ct = res.headers.get('content-type');
                     if (!(ct && ct.includes('application/json'))) return [3 /*break*/, 5];
-                    _a.label = 1;
+                    _b.label = 1;
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
+                    _b.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, res.json()];
                 case 2:
-                    retVal = _a.sent();
+                    retVal = _b.sent();
                     return [3 /*break*/, 4];
                 case 3:
-                    err_1 = _a.sent();
+                    err_1 = _b.sent();
                     console.error('error parsing response', err_1);
                     return [3 /*break*/, 4];
                 case 4:
@@ -75,7 +76,12 @@ function processResponse(res) {
                         throw __assign(__assign({}, retVal), { status: res.status });
                     }
                     return [2 /*return*/, retVal];
-                case 5: return [2 /*return*/];
+                case 5:
+                    if (!(res.status != 200)) return [3 /*break*/, 7];
+                    _a = {};
+                    return [4 /*yield*/, res.text()];
+                case 6: throw _a.message = _b.sent(), _a.status = res.status, _a;
+                case 7: return [2 /*return*/];
             }
         });
     });

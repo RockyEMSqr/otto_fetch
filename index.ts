@@ -1,6 +1,6 @@
 
 import 'unfetch/polyfill';
-async function processResponse(res:Response){
+async function processResponse(res: Response) {
     let retVal;
     // if(res.status == 404){
     //     throw 404;
@@ -12,23 +12,26 @@ async function processResponse(res:Response){
         } catch (err) {
             console.error('error parsing response', err)
         }
-        if(res.status != 200){
-            throw {...retVal, status: res.status};
+        if (res.status != 200) {
+            throw { ...retVal, status: res.status };
         }
         return retVal;
+    }
+    if (res.status != 200) {
+        throw { message: await res.text(), status: res.status };
     }
 }
 export async function getJSON<T = {}>(url) {
     let res = await fetch(url, {
         method: 'GET',
         headers: {
-            "Accept":"application/json"
+            "Accept": "application/json"
         },
         mode: 'cors',
         credentials: 'include'
     });
     return await processResponse(res) as T;
-    
+
 }
 
 export async function postJSON<T = {}>(url, data) {
@@ -38,7 +41,7 @@ export async function postJSON<T = {}>(url, data) {
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'include', // include, same-origin, *omit
         headers: {
-            "Accept":"application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json; charset=utf-8",
             // "Content-Type": "application/x-www-form-urlencoded",
         },
@@ -61,6 +64,6 @@ export async function postForm<T = {}>(url, data) {
         referrer: 'client', // *client, no-referrer
     });
     return await processResponse(res);
-    
+
 
 }
